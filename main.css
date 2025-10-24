@@ -13,7 +13,6 @@ body {
   background-color: rgba(0, 0, 0, 0.5);
   min-height: 100vh;
   color: #fff;
-  position: relative;
 }
 @media (min-width: 768px) {
   .container {
@@ -94,12 +93,12 @@ body {
   font-weight: 500;
 }
 .footer {
-  position: absolute;
+  position: relative;
+  margin-top: 15px;
   bottom: 0;
   left: 0;
+  width: 100%;
   background-color: rgba(255, 255, 255, 0.1);
-  width: calc(100% - 30px);
-  left: 15px;
   padding: 15px;
   text-align: center;
 }
