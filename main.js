@@ -8,6 +8,15 @@ let asr = document.querySelector(".asr");
 let maghrib = document.querySelector(".maghrib");
 let isha = document.querySelector(".isha");
 
+// Handle Local Storage Data
+window.onload = function () {
+  if (window.localStorage.getItem("city")) {
+    validCity = window.localStorage.getItem("city");
+    citySelect.value = validCity;
+    getData(`https://api.aladhan.com/v1/timingsByCity/${validDate}?city=${validCity}&country=${validCountry}&method=5`);
+  }
+};
+
 // Default Data
 let date = new Date();
 date = date.toLocaleString();
@@ -72,6 +81,7 @@ dateSelect.addEventListener("change", function () {
 // Handle The Change Of City
 citySelect.addEventListener("change", function () {
   validCity = citySelect.value;
+  window.localStorage.setItem("city", citySelect.value);
   getData(`https://api.aladhan.com/v1/timingsByCity/${validDate}?city=${validCity}&country=${validCountry}&method=5`);
 });
 
@@ -79,4 +89,6 @@ citySelect.addEventListener("change", function () {
 // Future Enhancement Is
 // -- Activate The Country Selection
 // -- And So On Change The Cities List Based On Selected Country
+// -- Idea For Adding Alazan Vice Or Any Regional Voice In Background Of App
+// -- Set Control Buttons To Control This Voice
 // =============================================================
