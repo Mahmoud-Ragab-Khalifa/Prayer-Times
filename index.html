@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Prayer Times</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="main.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">بسم الله الرحمن الرحيم</div>
+      <div class="controls">
+        <div class="date">
+          <span>أختر التاريخ</span>
+          <select name="date" id="date"></select>
+        </div>
+        <div class="country">
+          <span>أختر البلد</span>
+          <select name="country" id="country">
+            <option value="Egypt" selected>مصر</option>
+            <option value="Saudi Arabia" disabled>السعودية</option>
+            <option value="Morocco" disabled>المغرب</option>
+            <option value="Tunisia" disabled>تونس</option>
+          </select>
+        </div>
+        <div class="city">
+          <span>أختر المدينة</span>
+          <select name="city" id="city">
+            <option value="Cairo">القاهرة</option>
+            <option value="Alexandria" selected>الأسكندرية</option>
+            <option value="Giza">الجيزة</option>
+            <option value="Sohag">سوهاج</option>
+          </select>
+        </div>
+      </div>
+      <div class="prayer-times">
+        <div class="box">
+          <span>صلاة الفجر</span>
+          <span><span class="fajr"></span> AM</span>
+        </div>
+        <div class="box">
+          <span>صلاة الشروق</span>
+          <span><span class="sunrise"></span> AM</span>
+        </div>
+        <div class="box">
+          <span>صلاة الظهر</span>
+          <span><span class="dhuhr"></span> PM</span>
+        </div>
+        <div class="box">
+          <span>صلاة العصر</span>
+          <span><span class="asr"></span> PM</span>
+        </div>
+        <div class="box">
+          <span>صلاة المغرب</span>
+          <span><span class="maghrib"></span> PM</span>
+        </div>
+        <div class="box">
+          <span>صلاة العشاء</span>
+          <span><span class="isha"></span> PM</span>
+        </div>
+      </div>
+    </div>
+    <script src="main.js"></script>
+  </body>
+</html>
