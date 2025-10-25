@@ -10,28 +10,8 @@ let asr = document.querySelector(".asr");
 let maghrib = document.querySelector(".maghrib");
 let isha = document.querySelector(".isha");
 
-// Handle Local Storage Data
-window.onload = function () {
-  let allDateOtions = document.querySelectorAll("#date option");
-  console.log(allDateOtions);
-
-  allDateOtions.forEach((option) => {
-    if (option.value === validDate) {
-      dateSelect.value = validDate;
-      option.selected = true;
-    }
-  });
-  getTodayDate();
-  if (window.localStorage.getItem("city")) {
-    validCity = window.localStorage.getItem("city");
-    citySelect.value = validCity;
-    setCity(validCity);
-    getData(`https://api.aladhan.com/v1/timingsByCity/${validDate}?city=${validCity}&country=${validCountry}&method=5`);
-  }
-};
-
 // Default Data
-let date = new Date("2025-10-30");
+let date = new Date();
 date = date.toLocaleString();
 let validDate = `${date.slice(3, 5)}-${date.slice(0, 2)}-${date.slice(6, 10)}`;
 let city = citySelect.value;
@@ -110,8 +90,6 @@ function getData(apiLink) {
     });
 }
 
-getData(`https://api.aladhan.com/v1/timingsByCity/${validDate}?city=${validCity}&country=${validCountry}&method=5`);
-
 // Handle The Time In 4 Digts and 12 Hours Mode
 function handleTime(apiTime) {
   let hour = apiTime.slice(0, 2);
@@ -133,6 +111,25 @@ citySelect.addEventListener("change", function () {
   window.localStorage.setItem("city", citySelect.value);
   getData(`https://api.aladhan.com/v1/timingsByCity/${validDate}?city=${validCity}&country=${validCountry}&method=5`);
 });
+
+// Handle Local Storage Data
+window.onload = function () {
+  let allDateOtions = document.querySelectorAll("#date option");
+  allDateOtions.forEach((option) => {
+    if (option.value === validDate) {
+      dateSelect.value = validDate;
+      option.selected = true;
+      option.setAttribute("selected", "");
+    }
+  });
+  getTodayDate();
+  if (window.localStorage.getItem("city")) {
+    validCity = window.localStorage.getItem("city");
+    citySelect.value = validCity;
+    setCity(validCity);
+    getData(`https://api.aladhan.com/v1/timingsByCity/${validDate}?city=${validCity}&country=${validCountry}&method=5`);
+  }
+};
 
 // =============================================================
 // Future Enhancement Is
