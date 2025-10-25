@@ -12,6 +12,13 @@ let isha = document.querySelector(".isha");
 
 // Handle Local Storage Data
 window.onload = function () {
+  let allDateOtions = document.querySelectorAll("#date option");
+  allDateOtions.forEach((option) => {
+    if (option.innerHTML === validDate) {
+      dateSelect.value = validDate;
+      option.selected = true;
+    }
+  });
   if (window.localStorage.getItem("city")) {
     validCity = window.localStorage.getItem("city");
     citySelect.value = validCity;
@@ -128,6 +135,6 @@ citySelect.addEventListener("change", function () {
 // Future Enhancement Is
 // -- Activate The Country Selection
 // -- And So On Change The Cities List Based On Selected Country
-// -- Idea For Adding Alazan Vice Or Any Regional Voice In Background Of App
+// -- Idea For Adding Alazan Voice Or Any Regional Voice In Background Of App
 // -- Set Control Buttons To Control This Voice
 // =============================================================
