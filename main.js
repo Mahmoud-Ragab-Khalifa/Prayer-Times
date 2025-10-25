@@ -13,12 +13,15 @@ let isha = document.querySelector(".isha");
 // Handle Local Storage Data
 window.onload = function () {
   let allDateOtions = document.querySelectorAll("#date option");
+  console.log(allDateOtions);
+
   allDateOtions.forEach((option) => {
-    if (option.innerHTML === validDate) {
+    if (option.value === validDate) {
       dateSelect.value = validDate;
       option.selected = true;
     }
   });
+  getTodayDate();
   if (window.localStorage.getItem("city")) {
     validCity = window.localStorage.getItem("city");
     citySelect.value = validCity;
@@ -28,7 +31,7 @@ window.onload = function () {
 };
 
 // Default Data
-let date = new Date();
+let date = new Date("2025-10-30");
 date = date.toLocaleString();
 let validDate = `${date.slice(3, 5)}-${date.slice(0, 2)}-${date.slice(6, 10)}`;
 let city = citySelect.value;
@@ -40,8 +43,8 @@ let validCountry = `${country[0].toUpperCase()}${country.slice(1)}`;
 function fillDayes() {
   for (let i = 1; i <= 31; i++) {
     let option = document.createElement("option");
-    let date = new Date();
-    let content = `${i >= 10 ? i : `0${i}`}-${date.getMonth() + 1}-${date.getFullYear()}`;
+    let dat = new Date();
+    let content = `${i >= 10 ? i : `0${i}`}-${dat.getMonth() + 1}-${dat.getFullYear()}`;
     option.value = content;
     option.innerHTML = content;
     dateSelect.appendChild(option);
