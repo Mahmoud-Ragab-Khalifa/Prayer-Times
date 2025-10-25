@@ -12,8 +12,8 @@ let isha = document.querySelector(".isha");
 
 // Default Data
 let date = new Date();
-date = date.toLocaleString();
-let validDate = `${date.slice(3, 5)}-${date.slice(0, 2)}-${date.slice(6, 10)}`;
+let validDate = `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`;
+console.log(validDate);
 let city = citySelect.value;
 let validCity = `${city[0].toUpperCase()}${city.slice(1)}`;
 let country = "egypt";
@@ -101,6 +101,14 @@ function handleTime(apiTime) {
 // Handle The Change Of Date
 dateSelect.addEventListener("change", function () {
   validDate = dateSelect.value;
+  let allDateOtions = document.querySelectorAll("#date option");
+  allDateOtions.forEach((option) => {
+    if (option.value === validDate) {
+      dateSelect.value = validDate;
+      option.selected = true;
+      option.setAttribute("selected", "");
+    }
+  });
   getData(`https://api.aladhan.com/v1/timingsByCity/${validDate}?city=${validCity}&country=${validCountry}&method=5`);
 });
 
@@ -114,14 +122,6 @@ citySelect.addEventListener("change", function () {
 
 // Handle Local Storage Data
 window.onload = function () {
-  let allDateOtions = document.querySelectorAll("#date option");
-  allDateOtions.forEach((option) => {
-    if (option.value === validDate) {
-      dateSelect.value = validDate;
-      option.selected = true;
-      option.setAttribute("selected", "");
-    }
-  });
   getTodayDate();
   if (window.localStorage.getItem("city")) {
     validCity = window.localStorage.getItem("city");
