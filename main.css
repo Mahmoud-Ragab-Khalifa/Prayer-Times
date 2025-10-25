@@ -11,7 +11,7 @@ body {
   margin: 0 auto;
   padding: 0 15px;
   background-color: rgba(0, 0, 0, 0.5);
-  min-height: 100vh;
+  min-height: calc(100vh + 50px);
   color: #fff;
   position: relative;
 }
@@ -79,6 +79,27 @@ body {
   width: 130px;
   outline: none;
 }
+.container .info {
+  direction: rtl;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 15px 0;
+  background-color: #00bcd4;
+  padding: 15px;
+}
+.container .info .city-name {
+  font-size: 70px;
+}
+@media (max-width: 767px) {
+  .container .info .city-name {
+    font-size: 55px;
+  }
+}
+
+.container .info .date-info {
+  font-size: 20px;
+}
 .container .prayer-times {
   display: flex;
   flex-direction: column;
@@ -99,12 +120,12 @@ body {
   bottom: 0;
   left: 15px;
   width: calc(100% - 30px);
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(0, 0, 0, 0.6);
   padding: 15px;
   text-align: center;
 }
 @media (max-width: 767px) {
   .container {
-    height: 900px;
+    min-height: 1085px;
   }
 }

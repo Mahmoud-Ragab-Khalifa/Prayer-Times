@@ -1,6 +1,8 @@
 // Selectors
 let dateSelect = document.getElementById("date");
 let citySelect = document.getElementById("city");
+let cityName = document.querySelector(".city-name");
+let dateInfo = document.querySelector(".date-info");
 let fajr = document.querySelector(".fajr");
 let sunrise = document.querySelector(".sunrise");
 let dhuhr = document.querySelector(".dhuhr");
@@ -13,6 +15,7 @@ window.onload = function () {
   if (window.localStorage.getItem("city")) {
     validCity = window.localStorage.getItem("city");
     citySelect.value = validCity;
+    setCity(validCity);
     getData(`https://api.aladhan.com/v1/timingsByCity/${validDate}?city=${validCity}&country=${validCountry}&method=5`);
   }
 };
@@ -47,11 +50,46 @@ function getTodayDate() {
 
 getTodayDate();
 
+// Set Current City To App
+function setCity(city) {
+  let allCites = document.querySelectorAll("option");
+  allCites.forEach((city) => {
+    if (city.value === validCity) {
+      cityName.innerHTML = city.innerHTML;
+    }
+  });
+}
+
+// Function Fill All Date Data
+function fillDate(dayName, dayNumber, monthnumber, year) {
+  const monthsInArabic = [
+    "يناير",
+    "فبراير",
+    "مارس",
+    "أبريل",
+    "مايو",
+    "يونيو",
+    "يوليو",
+    "أغسطس",
+    "سبتمبر",
+    "أكتوبر",
+    "نوفمبر",
+    "ديسمبر",
+  ];
+  dateInfo.innerHTML = `${dayName} ${dayNumber} ${monthsInArabic[monthnumber - 1]} ${year}`;
+}
+
 // Get Timings Of Prayers And Set To App
 function getData(apiLink) {
   fetch(apiLink)
     .then((response) => response.json())
     .then((response) => {
+      fillDate(
+        response.data.date.hijri.weekday.ar,
+        response.data.date.gregorian.day,
+        response.data.date.gregorian.month.number,
+        response.data.date.gregorian.year
+      );
       let time = response.data.timings;
       fajr.innerHTML = handleTime(time.Fajr);
       sunrise.innerHTML = handleTime(time.Sunrise);
@@ -81,6 +119,7 @@ dateSelect.addEventListener("change", function () {
 // Handle The Change Of City
 citySelect.addEventListener("change", function () {
   validCity = citySelect.value;
+  setCity(validCity);
   window.localStorage.setItem("city", citySelect.value);
   getData(`https://api.aladhan.com/v1/timingsByCity/${validDate}?city=${validCity}&country=${validCountry}&method=5`);
 });
